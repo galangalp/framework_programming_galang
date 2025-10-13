@@ -5,8 +5,8 @@
 </head>
 <body>
     <h1>Daftar Semua Pengaduan</h1>
-    {% comment %} <a href="{% url 'pengaduan-tambah' %}">Tambah Pengaduan Baru</a> | {% endcomment %}
-    {% comment %} <a href="{% url 'warga-list' %}">Lihat Daftar Warga</a> {% endcomment %}
+    <a href="{% url 'pengaduan-tambah' %}">Tambah Pengaduan Baru</a> |
+    <a href="{% url 'warga-list' %}">Lihat Daftar Warga</a>
     <hr>
     <ul>
         {% for pengaduan in object_list %}
