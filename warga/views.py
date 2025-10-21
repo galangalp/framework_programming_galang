@@ -36,3 +36,17 @@ class WargaDeleteView(DeleteView):
     model = Warga
     template_name = 'warga/warga_confirm_delete.html'
     success_url = reverse_lazy('warga-list')
+
+class PengaduanUpdateView(UpdateView):
+    model = Pengaduan
+    form_class = PengaduanForm
+    template_name = 'warga/pengaduan_form.html'
+    success_url = reverse_lazy('pengaduan-list')
+
+class PengaduanDeleteView(DeleteView):
+    model = Pengaduan
+    template_name = 'warga/pengaduan_confirm_delete.html'
+    success_url = reverse_lazy('pengaduan-list')
+
+
+
