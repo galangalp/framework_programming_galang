@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from rest_framework import viewsets
+from .serializers import WargaSerializer, PengaduanSerializer
 
 from .models import Warga, Pengaduan
 from .forms import WargaForm, PengaduanForm
@@ -67,3 +69,10 @@ class PengaduanDetailAPIView(RetrieveAPIView):
     queryset = Pengaduan.objects.all()
     serializer_class = PengaduanSerializer
 
+class WargaViewSet(viewsets.ModelViewSet):
+    queryset = Warga.objects.all().order_by('-tanggal_registrasi')
+    serializer_class = WargaSerializer
+
+class PengaduanViewSet(viewsets.ModelViewSet):
+    queryset = Pengaduan.objects.all()
+    serializer_class = PengaduanSerializer
