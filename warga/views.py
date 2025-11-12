@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly 
 from .serializers import WargaSerializer, PengaduanSerializer
 
 from .models import Warga, Pengaduan
@@ -72,6 +73,7 @@ class PengaduanDetailAPIView(RetrieveAPIView):
 class WargaViewSet(viewsets.ModelViewSet):
     queryset = Warga.objects.all().order_by('-tanggal_registrasi')
     serializer_class = WargaSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class PengaduanViewSet(viewsets.ModelViewSet):
     queryset = Pengaduan.objects.all()
