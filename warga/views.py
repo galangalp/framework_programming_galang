@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly 
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import WargaSerializer, PengaduanSerializer
 
 from .models import Warga, Pengaduan
@@ -74,7 +75,15 @@ class WargaViewSet(viewsets.ModelViewSet):
     queryset = Warga.objects.all().order_by('-tanggal_registrasi')
     serializer_class = WargaSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['nama_lengkap', 'nik', 'alamat']
+    ordering_fields = ['nama_lengkap', 'tanggal_registrasi']
+
 
 class PengaduanViewSet(viewsets.ModelViewSet):
-    queryset = Pengaduan.objects.all()
+    queryset = Pengaduan.objects.all().order_by('-tanggal_lapor')
     serializer_class = PengaduanSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['judul', 'deskripsi']
+    ordering_fields = ['tanggal_lapor', 'status']
